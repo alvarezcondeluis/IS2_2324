@@ -1,0 +1,8 @@
+.metadata/ 
+.recommenders/ 
+.classpath 
+.project 
+.settings/ 
+bin/ 
+# Directorio de artefactosgeneradosen Maven 
+target/
