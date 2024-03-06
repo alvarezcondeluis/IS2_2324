@@ -12,7 +12,7 @@ import es.unican.is2.interfaces.ITiendasDAO;
 public class GestionEmpleados implements IGestionEmpleados{
 
 	public GestionEmpleados(ITiendasDAO tiendasDAO, IEmpleadosDAO empleadosDAO) {
-		// TODO Auto-generated constructor stub
+		// TODO Auto-generated constructor stubsfd
 	}
 
 	public Empleado nuevoEmpleado(Empleado e, String nombre) throws OperacionNoValidaException, DataAccessException {
