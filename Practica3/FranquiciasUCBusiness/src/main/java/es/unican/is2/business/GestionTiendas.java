@@ -9,24 +9,36 @@ import es.unican.is2.interfaces.ITiendasDAO;
 
 public class GestionTiendas implements IGestionTiendas {
 	
+	private ITiendasDAO tiendas;
 	
 	public GestionTiendas(ITiendasDAO tiendasDAO) {
-		// TODO Auto-generated constructor stub
+		this.tiendas = tiendasDAO;
 	}
 
+	
 	public Tienda nuevaTienda(Tienda t) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return tiendas.tienda(t.getId());
 	}
 
 	public Tienda eliminarTienda(String nombre) throws OperacionNoValidaException, DataAccessException {
-		// TODO Auto-generated method stub
-		return null;
+		Tienda tienda = tiendas.tiendaPorNombre(nombre);
+		
+		if (tienda == null) {
+			return null;
+		} else {
+			if (tienda.getEmpleados().size() > 0) {
+				throw new OperacionNoValidaException("Tienda tiene empleados");
+			}
+			
+			return tiendas.eliminarTienda(tienda.getId());
+		}
+		
 	}
 
 	public Tienda tienda(String nombre) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return tiendas.tiendaPorNombre(nombre);
 	}
 
 }

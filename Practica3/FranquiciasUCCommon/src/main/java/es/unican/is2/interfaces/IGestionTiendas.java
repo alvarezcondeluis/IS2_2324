@@ -14,7 +14,7 @@ public interface IGestionTiendas {
 	 * @param t Tienda que se desea anhadir
 	 * @return La tienda anhadida 
 	 *         null si no se anhade porque ya existe
-	 * @throws DataAccessException Si hay un error en el acceso a los datos
+	 * @throws DataAccessException Si hay un error en el acceso a los datos 
 	 */
 	public Tienda nuevaTienda(Tienda t) throws DataAccessException;
 
