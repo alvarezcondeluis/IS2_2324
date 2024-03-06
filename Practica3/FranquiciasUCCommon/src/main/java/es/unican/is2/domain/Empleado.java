@@ -2,6 +2,7 @@ package es.unican.is2.domain;
 
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 /**
  * Clase que representa un empleado de la franquicia, 
  * con sus datos personales 
@@ -14,6 +15,7 @@ public class Empleado {
 	private Categoria categoria;
 	private LocalDate fechaContratacion;
 	private boolean baja = false;
+	private double sueldoBase = 0;
 	
 	public Empleado() {	}
 	
@@ -30,14 +32,40 @@ public class Empleado {
 		this.DNI=DNI;
 		this.categoria=categoria;
 		this.fechaContratacion=fechaContratacion;
+		switch (this.categoria) {
+		case ENCARGADO:
+			this.sueldoBase = 2000;
+		case VENDEDOR:
+			this.sueldoBase = 1500;
+		case AUXILIAR:
+			this.sueldoBase = 1000;
+			
+		default:
+			System.out.println("Fallo categoria");
+		}
 	}
 	
 	/**
 	 * Retorna el sueldo bruto del empleado
 	 */
 	public double sueldoBruto() {
-		// TODO
-		return 0;
+		double bruto = sueldoBase + this.calcularComplemento();
+		if (this.baja) {
+			bruto = bruto * 0.75; 
+		}
+		return bruto;
+	}
+	
+	private double calcularComplemento() {
+		LocalDate fechaActual = LocalDate.now();
+		long añosTranscurridos = fechaContratacion.until(fechaActual, ChronoUnit.YEARS);
+		if (añosTranscurridos > 5 && añosTranscurridos <= 10) {
+			return 50;
+		} else if (añosTranscurridos > 10 && añosTranscurridos <= 20) {
+			return 100;
+		} else {
+			return 200;
+		}
 	}
 	
 	/** 
