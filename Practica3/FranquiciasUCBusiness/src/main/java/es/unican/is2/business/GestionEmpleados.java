@@ -2,6 +2,7 @@ package es.unican.is2.business;
 
 
 import es.unican.is2.domain.Empleado;
+import es.unican.is2.domain.Tienda;
 import es.unican.is2.exceptions.DataAccessException;
 import es.unican.is2.exceptions.OperacionNoValidaException;
 import es.unican.is2.interfaces.IEmpleadosDAO;
@@ -10,9 +11,14 @@ import es.unican.is2.interfaces.ITiendasDAO;
 
 
 public class GestionEmpleados implements IGestionEmpleados{
+	
+	private ITiendasDAO tiendas = null;
+	private IEmpleadosDAO empleados = null;
 
 	public GestionEmpleados(ITiendasDAO tiendasDAO, IEmpleadosDAO empleadosDAO) {
-		// TODO Auto-generated constructor stubsfd
+		this.tiendas = tiendasDAO;
+		this.empleados = empleadosDAO;
+		
 	}
 
 	public Empleado nuevoEmpleado(Empleado e, String nombre) throws OperacionNoValidaException, DataAccessException {
@@ -21,8 +27,16 @@ public class GestionEmpleados implements IGestionEmpleados{
 	}
 
 	public Empleado eliminarEmpleado(String dni, String nombre) throws OperacionNoValidaException, DataAccessException {
-		// TODO Auto-generated method stub
-		return null;
+		Tienda t = tiendas.tiendaPorNombre(nombre);
+		if (t == null) {
+			return null;
+		}
+		Empleado e = t.buscaEmpleado(dni);
+		if (e == null) {
+			throw new OperacionNoValidaException("Empleado no existe");
+		}
+		t.getEmpleados().remove(e);
+		return e;
 	}
 
 	public boolean trasladarEmpleado(String dni, String actual, String destino)
@@ -33,7 +47,8 @@ public class GestionEmpleados implements IGestionEmpleados{
 
 	public Empleado empleado(String dni) throws DataAccessException {
 		// TODO Auto-generated method stub
-		return null;
+		Empleado  e = empleados.empleado(dni);
+		return e;
 	}
 
 }
