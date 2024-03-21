@@ -27,21 +27,25 @@ public class Empleado {
 	 * @param categoria
 	 * @param fechaContratacion
 	 */
-	public Empleado(String DNI, String nombre, Categoria categoria, LocalDate fechaContratacion) {
+	public Empleado(String DNI, String nombre, Categoria categoria, LocalDate fechaContratacion) 
+							throws IllegalArgumentException, NullPointerException {
+		if (DNI == null || DNI == ""|| nombre == null || nombre == "" 
+				|| fechaContratacion.compareTo(LocalDate.now()) > 0) {
+			throw new IllegalArgumentException();
+		} 
 		this.nombre = nombre;
 		this.DNI=DNI;
 		this.categoria=categoria;
 		this.fechaContratacion=fechaContratacion;
-		switch (this.categoria) {
-		case ENCARGADO:
+		if (this.categoria == Categoria.ENCARGADO) {
 			this.sueldoBase = 2000;
-		case VENDEDOR:
+		} else if (this.categoria == Categoria.VENDEDOR) {
 			this.sueldoBase = 1500;
-		case AUXILIAR:
+		} else if (this.categoria == Categoria.AUXILIAR) {
 			this.sueldoBase = 1000;
-			
-		default:
-			System.out.println("Fallo categoria");
+		} else {
+			System.out.println("Fallo de categoria");
+			throw new IllegalArgumentException();
 		}
 	}
 	
