@@ -57,6 +57,7 @@ public class EmpleadoTest {
 		empleado.setFechaContratacion(LocalDate.now().minusYears(21));
 		assertEquals(2200, empleado.sueldoBruto());
 		
+		// NO FUNCIONA. HAY Q REPARAR LOS SETTERS Y LA FUNCION calcularComplemento que tampoco funciona bien 
 		empleado.setCategoria(Categoria.VENDEDOR);
 		empleado.darDeBaja();
 		empleado.setFechaContratacion(LocalDate.now().minusYears(20));
@@ -64,6 +65,7 @@ public class EmpleadoTest {
 		
 		empleado.setCategoria(Categoria.AUXILIAR);
 		empleado.setFechaContratacion(LocalDate.now().minusYears(15));
+		empleado.darDeBaja();
 		assertEquals(825, empleado.sueldoBruto());
 		
 		empleado.setCategoria(Categoria.ENCARGADO);
