@@ -67,8 +67,10 @@ public class Empleado {
 			return 50;
 		} else if (añosTranscurridos > 10 && añosTranscurridos <= 20) {
 			return 100;
-		} else {
+		} else  if (añosTranscurridos > 20) {
 			return 200;
+		} else {
+			return 0;
 		}
 	}
 	
@@ -146,6 +148,13 @@ public class Empleado {
 	}
 
 	public void setCategoria(Categoria categoria) {
+		if (categoria.equals(Categoria.ENCARGADO)) {
+			this.sueldoBase = 2000;
+		} else if (categoria.equals(Categoria.VENDEDOR)) {
+			this.sueldoBase = 1500;
+		} else if (categoria.equals(Categoria.AUXILIAR)) {
+			this.sueldoBase = 1000;
+		}
 		this.categoria = categoria;
 	}
 	

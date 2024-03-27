@@ -9,16 +9,15 @@ import org.junit.jupiter.api.*;
 public class EmpleadoTest {
 	
 	private Empleado empleado;
-	/*
+	
 	@BeforeEach
 	public void setUp() throws Exception {
 		empleado = new Empleado("72207836G", "Luis", Categoria.ENCARGADO, LocalDate.parse("2015-08-03"));
-	}
-	*/
+	} 
+	
 	@Test
 	public void testConstructor() {
 		//Casos Validos
-		empleado = new Empleado("72207836G", "Luis", Categoria.ENCARGADO, LocalDate.parse("2015-08-03"));
 		assertEquals("72207836G", empleado.getDNI());
 		assertEquals("Luis", empleado.getNombre());
 		assertEquals(Categoria.ENCARGADO, empleado.getCategoria());
@@ -49,17 +48,15 @@ public class EmpleadoTest {
 		assertThrows(IllegalArgumentException.class, 
 				() -> new Empleado("72207836G", "Luis", null, LocalDate.parse("2015-08-03")));
 		assertThrows(IllegalArgumentException.class, 
-				() -> new Empleado("72207836G", "Luis", Categoria.ENCARGADO, LocalDate.now().plusDays(1)));		
+				() -> new Empleado("72207836G", "Luis", Categoria.ENCARGADO, LocalDate.now().plusDays(1)));	
 	}
 	
 	@Test
 	public void testSueldoBruto() {
 		
-		empleado = new Empleado("72207836G", "Luis", Categoria.ENCARGADO, LocalDate.parse("2015-08-03"));
 		empleado.setFechaContratacion(LocalDate.now().minusYears(21));
 		assertEquals(2200, empleado.sueldoBruto());
 		
-		// NO FUNCIONA. HAY Q REPARAR LOS SETTERS Y LA FUNCION calcularComplemento que tampoco funciona bien 
 		empleado.setCategoria(Categoria.VENDEDOR);
 		empleado.darDeBaja();
 		empleado.setFechaContratacion(LocalDate.now().minusYears(20));
