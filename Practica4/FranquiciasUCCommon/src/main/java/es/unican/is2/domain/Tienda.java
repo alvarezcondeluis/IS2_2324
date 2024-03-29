@@ -19,13 +19,16 @@ public class Tienda implements Serializable {
 	private List<Empleado> empleados = new LinkedList<Empleado>();
 	
 	public Tienda() {}
-	
+
 	/**
 	 * Constructor de tienda con nombre y direccion
 	 * @param nombre Nombre de la tienda
 	 * @param direccion Direccion de la tienda
 	 */
-	public Tienda(String nombre, String direccion) {
+	public Tienda(String nombre, String direccion) throws IllegalArgumentException {
+		if (nombre == null || nombre == ""|| direccion == null || direccion == "") {
+			throw new IllegalArgumentException();
+		} 
 		this.nombre=nombre;
 		this.direccion= direccion;
 	}
@@ -97,5 +100,9 @@ public class Tienda implements Serializable {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+	
+	public void anhadeEmpleado(Empleado e) {
+		empleados.add(e);
 	}
 }
