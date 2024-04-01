@@ -1,8 +1,9 @@
 package es.unican.is2.domain;
 
 
-import java.time.LocalDate;
+import java.time.LocalDate; 
 import java.time.temporal.ChronoUnit;
+import es.unican.is2.domain.Categoria;
 /**
  * Clase que representa un empleado de la franquicia, 
  * con sus datos personales 
@@ -62,12 +63,12 @@ public class Empleado {
 	
 	private double calcularComplemento() {
 		LocalDate fechaActual = LocalDate.now();
-		long añosTranscurridos = fechaContratacion.until(fechaActual, ChronoUnit.YEARS);
-		if (añosTranscurridos > 5 && añosTranscurridos <= 10) {
+		long anhosTranscurridos = fechaContratacion.until(fechaActual, ChronoUnit.YEARS);
+		if (anhosTranscurridos > 5 && anhosTranscurridos <= 10) {
 			return 50;
-		} else if (añosTranscurridos > 10 && añosTranscurridos <= 20) {
+		} else if (anhosTranscurridos > 10 && anhosTranscurridos <= 20) {
 			return 100;
-		} else  if (añosTranscurridos > 20) {
+		} else  if (anhosTranscurridos > 20) {
 			return 200;
 		} else {
 			return 0;

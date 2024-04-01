@@ -98,7 +98,7 @@ public class VistaGerente extends JFrame {
 		txtNombreTienda.setBounds(10, 51, 113, 20);
 		contentPane.add(txtNombreTienda);
 		txtNombreTienda.setColumns(10);
-		txtNombreTienda.setName("txtDireccionTienda");
+		txtNombreTienda.setName("txtNombreTienda");
 
 		JLabel lblNombreTienda = new JLabel("Nombre Tienda");
 		lblNombreTienda.setBounds(21, 27, 139, 14);
@@ -122,10 +122,10 @@ public class VistaGerente extends JFrame {
 		try {
 		Tienda t = tiendas.tienda(nombre);
 		if (t != null) {
-			txtDireccionTienda.setText(t.getNombre());
+			txtDireccionTienda.setText(t.getDireccion());
 			txtTotalSueldos.setText(Double.toString(t.gastoMensualSueldos()));
 			listModel.removeAllElements();
-			for (int i = 0; i < t.getEmpleados().size()-1; i++) {
+			for (int i = 0; i < t.getEmpleados().size(); i++) {
 				Empleado e = t.getEmpleados().get(i);
 				listModel.addElement(e.getNombre());
 			}

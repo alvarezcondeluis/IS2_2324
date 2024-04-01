@@ -1,10 +1,11 @@
 package es.unican.is2.domain;
 
-import static org.junit.jupiter.api.Assertions.*;
-
+import static org.junit.jupiter.api.Assertions.*; 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.time.LocalDate;
 
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.function.Executable;
 
 public class EmpleadoTest {
 	
@@ -37,18 +38,47 @@ public class EmpleadoTest {
 		
 		
 		//Casos No Validos
-		assertThrows(IllegalArgumentException.class, 
-				() -> new Empleado(null, "Luis", Categoria.ENCARGADO, LocalDate.parse("2015-08-03")));
-		assertThrows(IllegalArgumentException.class, 
-				() -> new Empleado("", "Luis", Categoria.ENCARGADO, LocalDate.parse("2015-08-03")));
-		assertThrows(IllegalArgumentException.class, 
-				() -> new Empleado("72207836G", null, Categoria.ENCARGADO, LocalDate.parse("2015-08-03")));
-		assertThrows(IllegalArgumentException.class, 
-				() -> new Empleado("72207836G", "", Categoria.ENCARGADO, LocalDate.parse("2015-08-03")));
-		assertThrows(IllegalArgumentException.class, 
-				() -> new Empleado("72207836G", "Luis", null, LocalDate.parse("2015-08-03")));
-		assertThrows(IllegalArgumentException.class, 
-				() -> new Empleado("72207836G", "Luis", Categoria.ENCARGADO, LocalDate.now().plusDays(1)));	
+		
+		assertThrows(IllegalArgumentException.class, new Executable() {
+            
+            public void execute() throws Throwable {
+                new Empleado(null, "Luis", Categoria.ENCARGADO, LocalDate.parse("2015-08-03"));
+            }
+        });
+
+        assertThrows(IllegalArgumentException.class, new Executable() {
+            public void execute() throws Throwable {
+                new Empleado("", "Luis", Categoria.ENCARGADO, LocalDate.parse("2015-08-03"));
+            }
+        });
+
+        assertThrows(IllegalArgumentException.class, new Executable() {
+           
+            public void execute() throws Throwable {
+                new Empleado("72207836G", null, Categoria.ENCARGADO, LocalDate.parse("2015-08-03"));
+            }
+        });
+
+        assertThrows(IllegalArgumentException.class, new Executable() {
+            
+            public void execute() throws Throwable {
+                new Empleado("72207836G", "", Categoria.ENCARGADO, LocalDate.parse("2015-08-03"));
+            }
+        });
+
+        assertThrows(IllegalArgumentException.class, new Executable() {
+           
+            public void execute() throws Throwable {
+                new Empleado("72207836G", "Luis", null, LocalDate.parse("2015-08-03"));
+            }
+        });
+
+        assertThrows(IllegalArgumentException.class, new Executable() {
+           
+            public void execute() throws Throwable {
+                new Empleado("72207836G", "Luis", Categoria.ENCARGADO, LocalDate.now().plusDays(1));
+            }
+        });
 	}
 	
 	@Test
