@@ -17,7 +17,7 @@ import es.unican.is2.business.GestionTiendas;
 
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class VistaGerenteTest {
+public class VistaGerenteITest {
 	
 	private FrameFixture demo;
 	
