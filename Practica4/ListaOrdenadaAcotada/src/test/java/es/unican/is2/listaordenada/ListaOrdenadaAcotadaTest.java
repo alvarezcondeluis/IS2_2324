@@ -98,7 +98,7 @@ class ListaOrdenadaAcotadaTest {
 	}
 
 	@Test
-	public void getTest() {
+	public void testGet() {
 		
 		//Casos validos
 		listaOrdenadaAcotada = new ListaOrdenadaAcotada(4);
