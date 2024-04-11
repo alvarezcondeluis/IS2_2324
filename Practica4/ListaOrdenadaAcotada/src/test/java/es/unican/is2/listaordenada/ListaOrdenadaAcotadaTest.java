@@ -10,6 +10,12 @@ class ListaOrdenadaAcotadaTest {
 	
 	private ListaOrdenadaAcotada listaOrdenadaAcotada;
 	
+	@BeforeEach
+	public void setUp() throws Exception {
+		//Creacion de listas de capacidad maxima 10 para las comprobaciones
+		listaOrdenadaAcotada = new ListaOrdenadaAcotada<>(10);
+	}
+	
 	@Test
 	public void testConstructor() {
 		
@@ -25,6 +31,12 @@ class ListaOrdenadaAcotadaTest {
 		
 		
 		listaOrdenadaAcotada = new ListaOrdenadaAcotada<>(20);
+		for (int i = 0; i < 20; i++) {
+			listaOrdenadaAcotada.add(i);
+		}
+		assertThrows(IllegalStateException.class, () -> {	
+			listaOrdenadaAcotada.add(1);
+		} );
 		assertNotNull(listaOrdenadaAcotada);
 		
 		listaOrdenadaAcotada = new ListaOrdenadaAcotada<>(1000000);
@@ -58,42 +70,41 @@ class ListaOrdenadaAcotadaTest {
 		listaOrdenadaAcotada.add(9);
 		listaOrdenadaAcotada.add(7);
 		
-		// Comprobamos que el tamaño maximo de la lista sea 4
-		assertThrows(IllegalStateException.class, () -> {	
-				listaOrdenadaAcotada.add(1);
-		} );
-		assertNotNull(listaOrdenadaAcotada);
+		assertTrue(listaOrdenadaAcotada.get(0).equals(4));
+		assertTrue(listaOrdenadaAcotada.get(2).equals(7));
+		assertTrue(listaOrdenadaAcotada.get(3).equals(9));
 		
-		
-		listaOrdenadaAcotada = new ListaOrdenadaAcotada<>(20);
-		assertNotNull(listaOrdenadaAcotada);
-		
-		listaOrdenadaAcotada = new ListaOrdenadaAcotada<>(1000000);
-		assertNotNull(listaOrdenadaAcotada);
-		
-		listaOrdenadaAcotada = new ListaOrdenadaAcotada<>(0);
-		assertNotNull(listaOrdenadaAcotada);
-		assertThrows(IllegalStateException.class, () -> {	
-			listaOrdenadaAcotada.add(1);
-		} );
 		
 		// Casos no validos
 		
-		assertThrows(NegativeArraySizeException.class, () -> {	
-			listaOrdenadaAcotada = new ListaOrdenadaAcotada<>(-10000);
+		listaOrdenadaAcotada = new ListaOrdenadaAcotada(0);
+		assertThrows(IndexOutOfBoundsException.class, () -> {	
+			listaOrdenadaAcotada.get(0);
+		} );
+		
+		listaOrdenadaAcotada = new ListaOrdenadaAcotada(4);
+		listaOrdenadaAcotada.add(6);
+		listaOrdenadaAcotada.add(4);
+		listaOrdenadaAcotada.add(9);
+		listaOrdenadaAcotada.add(7);
+		
+		assertThrows(IndexOutOfBoundsException.class, () -> {	
+			listaOrdenadaAcotada.get(4);
 		} );
 		
 		
-		assertThrows(NegativeArraySizeException.class, () -> {	
-			listaOrdenadaAcotada = new ListaOrdenadaAcotada<>(-1);
+		assertThrows(IndexOutOfBoundsException.class, () -> {	
+			listaOrdenadaAcotada.get(-5);
 		} );
+		
+		assertThrows(IndexOutOfBoundsException.class, () -> {	
+			listaOrdenadaAcotada.get(10);
+		} );
+		
+		
 	}
 	
-	@BeforeEach
-	public void setUp() throws Exception {
-		//Creacion de listas de capacidad maxima 10 para las comprobaciones
-		listaOrdenadaAcotada = new ListaOrdenadaAcotada<>(10);
-	}
+	
 	
 	
 	@Test
@@ -146,7 +157,40 @@ class ListaOrdenadaAcotadaTest {
 		
 		
 	}
+	/**
+	@Test
+	public void testRemove() {
+		
+		
+		
+		assertTrue(listaOrdenadaAcotada.remove(0).equals(4));
+		assertTrue(listaOrdenadaAcotada.get(0).equals(6));
+		assertTrue(listaOrdenadaAcotada.get(1).equals(7));
+		System.out.println(listaOrdenadaAcotada.get(2));
+		assertTrue(listaOrdenadaAcotada.get(2).equals(9));
+		listaOrdenadaAcotada.add(4);
+		
+		
+		listaOrdenadaAcotada = new ListaOrdenadaAcotada<>(4);
+		listaOrdenadaAcotada.add(4);
+		listaOrdenadaAcotada.add(6);
+		listaOrdenadaAcotada.add(7);
+		listaOrdenadaAcotada.add(9);
+		
+		assertTrue(listaOrdenadaAcotada.remove(2).equals(7));
+		assertTrue(listaOrdenadaAcotada.get(0).equals(4));
+		assertTrue(listaOrdenadaAcotada.get(1).equals(6));
+		assertTrue(listaOrdenadaAcotada.get(2).equals(9));
+		listaOrdenadaAcotada.add(7);
+		
+		assertTrue(listaOrdenadaAcotada.remove(3).equals(9));
+		assertTrue(listaOrdenadaAcotada.get(0).equals(4));
+		assertTrue(listaOrdenadaAcotada.get(1).equals(6));
+		assertTrue(listaOrdenadaAcotada.get(2).equals(7));
+		listaOrdenadaAcotada.add(9);
+	}
 
+	*/
 	@Test
 	public void testSize() {
 		//Variable para comprobar el tamanho de la lista
