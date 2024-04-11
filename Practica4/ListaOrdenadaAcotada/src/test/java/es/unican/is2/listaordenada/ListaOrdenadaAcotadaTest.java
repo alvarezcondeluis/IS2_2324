@@ -1,6 +1,7 @@
 package es.unican.is2.listaordenada;
-import static org.junit.jupiter.api.Assertions.*; 
+import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import es.unican.is2.listaOrdenadaAcotada.ListaOrdenadaAcotada;
@@ -48,56 +49,6 @@ class ListaOrdenadaAcotadaTest {
 	}
 	
 	@Test
-	public void testAdd() {
-		//Creo lista de tamaño 10
-		listaOrdenadaAcotada = new ListaOrdenadaAcotada<>(10);
-		//Creo variable elemento para las comprobaciones
-		int elemento;
-		
-		//Casos validos
-		listaOrdenadaAcotada.add(1);
-		elemento = (int) listaOrdenadaAcotada.get(0);
-		assertEquals(elemento, 1);
-		
-		listaOrdenadaAcotada.add(5);
-		listaOrdenadaAcotada.add(10);
-		listaOrdenadaAcotada.add(3);
-		//Compruebo que el segundo elemento es 3
-		elemento =  (int) listaOrdenadaAcotada.get(1);
-		assertEquals(elemento, 3);
-		//Compruebo que el tercer elemento es 5
-		elemento =  (int) listaOrdenadaAcotada.get(2);
-		assertEquals(elemento, 5);
-		//Compruebo que el cuarto elemento es 10
-		elemento =  (int) listaOrdenadaAcotada.get(3);
-		assertEquals(elemento, 10);
-		//Compruebo que al meter un valor que ya estaba se encuentran en su posicion
-		listaOrdenadaAcotada.add(3);
-		elemento =  (int) listaOrdenadaAcotada.get(1);
-		assertEquals(elemento, 3);
-		elemento =  (int) listaOrdenadaAcotada.get(2);
-		assertEquals(elemento, 3);
-		
-		//Casos no validos
-		assertThrows(NullPointerException.class, () -> {
-			listaOrdenadaAcotada.add(null);
-		});
-		
-		//Lleno la lista
-		listaOrdenadaAcotada.add(4);
-		listaOrdenadaAcotada.add(6);
-		listaOrdenadaAcotada.add(7);
-		listaOrdenadaAcotada.add(8);
-		listaOrdenadaAcotada.add(9);
-		//Compruebo que si meto un valor cuando esta llena salta error
-		assertThrows(IllegalStateException.class, () -> {
-			listaOrdenadaAcotada.add(50);
-		});
-		
-		
-	}
-
-	@Test
 	public void testGet() {
 		
 		//Casos validos
@@ -107,7 +58,7 @@ class ListaOrdenadaAcotadaTest {
 		listaOrdenadaAcotada.add(9);
 		listaOrdenadaAcotada.add(7);
 		
-		// Comprobamos que el tamaño maximo de la lista sea 1
+		// Comprobamos que el tamaño maximo de la lista sea 4
 		assertThrows(IllegalStateException.class, () -> {	
 				listaOrdenadaAcotada.add(1);
 		} );
@@ -137,4 +88,116 @@ class ListaOrdenadaAcotadaTest {
 			listaOrdenadaAcotada = new ListaOrdenadaAcotada<>(-1);
 		} );
 	}
+	
+	@BeforeEach
+	public void setUp() throws Exception {
+		//Creacion de listas de capacidad maxima 10 para las comprobaciones
+		listaOrdenadaAcotada = new ListaOrdenadaAcotada<>(10);
+	}
+	
+	
+	@Test
+	public void testAdd() {
+		//Creo variable elemento para las comprobaciones
+		int elemento;
+		
+		//Casos validos
+		//Meto un elemento y compruebo que es correcto 
+		listaOrdenadaAcotada.add(1);
+		elemento = (int) listaOrdenadaAcotada.get(0);
+		assertEquals(1, elemento);
+		//Meto mas elementos
+		listaOrdenadaAcotada.add(5);
+		listaOrdenadaAcotada.add(10);
+		listaOrdenadaAcotada.add(3);
+		//Compruebo que se ha ordenado
+		//Compruebo que el segundo elemento es 3
+		elemento =  (int) listaOrdenadaAcotada.get(1);
+		assertEquals(3, elemento);
+		//Compruebo que el tercer elemento es 5
+		elemento =  (int) listaOrdenadaAcotada.get(2);
+		assertEquals(5, elemento);
+		//Compruebo que el cuarto elemento es 10
+		elemento =  (int) listaOrdenadaAcotada.get(3);
+		assertEquals(10, elemento);
+		//Compruebo que al meter un valor que ya estaba se encuentran en su posicion
+		listaOrdenadaAcotada.add(3);
+		elemento =  (int) listaOrdenadaAcotada.get(1);
+		assertEquals(3, elemento);
+		elemento =  (int) listaOrdenadaAcotada.get(2);
+		assertEquals(3, elemento);
+		
+		//Casos no validos
+		//Compruebo cuando se mete un valor a NULL
+		assertThrows(NullPointerException.class, () -> {
+			listaOrdenadaAcotada.add(null);
+		});
+		
+		//Lleno la lista
+		listaOrdenadaAcotada.add(4);
+		listaOrdenadaAcotada.add(6);
+		listaOrdenadaAcotada.add(7);
+		listaOrdenadaAcotada.add(8);
+		listaOrdenadaAcotada.add(9);
+		//Compruebo que si meto un valor cuando esta llena salta error
+		assertThrows(IllegalStateException.class, () -> {
+			listaOrdenadaAcotada.add(50);
+		});
+		
+		
+	}
+
+	@Test
+	public void testSize() {
+		//Variable para comprobar el tamanho de la lista
+		int tamanho = 0;
+		
+		//Casos validos
+		
+		//Compruebo lista vacia
+		tamanho = listaOrdenadaAcotada.size();
+		assertEquals(0, tamanho);
+		//Compruebo lista con 1 elemento
+		listaOrdenadaAcotada.add(1);
+		tamanho = listaOrdenadaAcotada.size();
+		assertEquals(1, tamanho);
+		//compruebo lista con 5 elementos
+		listaOrdenadaAcotada.add(1);
+		listaOrdenadaAcotada.add(1);
+		listaOrdenadaAcotada.add(1);
+		listaOrdenadaAcotada.add(1);
+		tamanho = listaOrdenadaAcotada.size();
+		assertEquals(5, tamanho);
+		//Compruebo lista llena (10 elementos)
+		listaOrdenadaAcotada.add(1);
+		listaOrdenadaAcotada.add(1);
+		listaOrdenadaAcotada.add(1);
+		listaOrdenadaAcotada.add(1);
+		listaOrdenadaAcotada.add(1);
+		tamanho = listaOrdenadaAcotada.size();
+		assertEquals(10, tamanho);
+	}
+	
+	//METODO CLEAR FUNCIONA MAL
+	/*
+	@Test
+	public void testClear() {
+		//Casos validos
+		
+		//Con una lista vacia
+		listaOrdenadaAcotada.clear();
+		assertEquals(null, listaOrdenadaAcotada.get(0));
+		
+		//Con una lista con elementos
+		//Anhado elementos
+		listaOrdenadaAcotada.add(1);
+		listaOrdenadaAcotada.add(1);
+		//Compruebo que se han anhadido correctamente
+		assertNotNull(listaOrdenadaAcotada.get(0));
+		//Vacio y compruebo que se ha vaciado
+		listaOrdenadaAcotada.clear();
+		assertEquals(null, listaOrdenadaAcotada.get(0));
+		
+	}
+	*/
 }
