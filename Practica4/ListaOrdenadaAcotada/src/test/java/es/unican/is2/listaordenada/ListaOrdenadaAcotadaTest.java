@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import es.unican.is2.listaOrdenadaAcotada.ListaOrdenadaAcotada;
+import es.unican.is2.listaordenada.ListaOrdenadaAcotada;
 
 class ListaOrdenadaAcotadaTest {
 	
