@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import es.unican.is2.listaordenada.ListaOrdenadaAcotada;
 
 class ListaOrdenadaAcotadaTest {
 	
@@ -20,7 +19,7 @@ class ListaOrdenadaAcotadaTest {
 	public void testConstructor() {
 		
 		//Casos validos
-		listaOrdenadaAcotada = new ListaOrdenadaAcotada(1);
+		listaOrdenadaAcotada = new ListaOrdenadaAcotada<>(1);
 		listaOrdenadaAcotada.add(1);
 		
 		// Comprobamos que el tamaño maximo de la lista sea 1
@@ -157,40 +156,65 @@ class ListaOrdenadaAcotadaTest {
 		
 		
 	}
-	/**
+	
 	@Test
 	public void testRemove() {
 		
+		//Casos validos
 		
-		
-		assertTrue(listaOrdenadaAcotada.remove(0).equals(4));
-		assertTrue(listaOrdenadaAcotada.get(0).equals(6));
-		assertTrue(listaOrdenadaAcotada.get(1).equals(7));
-		System.out.println(listaOrdenadaAcotada.get(2));
-		assertTrue(listaOrdenadaAcotada.get(2).equals(9));
-		listaOrdenadaAcotada.add(4);
-		
-		
-		listaOrdenadaAcotada = new ListaOrdenadaAcotada<>(4);
+		//Anhado elementos a la lista
 		listaOrdenadaAcotada.add(4);
 		listaOrdenadaAcotada.add(6);
 		listaOrdenadaAcotada.add(7);
 		listaOrdenadaAcotada.add(9);
 		
-		assertTrue(listaOrdenadaAcotada.remove(2).equals(7));
-		assertTrue(listaOrdenadaAcotada.get(0).equals(4));
-		assertTrue(listaOrdenadaAcotada.get(1).equals(6));
-		assertTrue(listaOrdenadaAcotada.get(2).equals(9));
+		//Compruebo que el remove funciona para el primer elemento
+		assertEquals(4, listaOrdenadaAcotada.remove(0));
+		assertEquals(6, listaOrdenadaAcotada.get(0));
+		assertEquals(7, listaOrdenadaAcotada.get(1));
+		assertEquals(9, listaOrdenadaAcotada.get(2));
+		
+		//Vuelvo a añadir elementos para tener la lista [4, 6, 7, 9]
+		listaOrdenadaAcotada.add(4);
+		
+		//Compruebo que funciona el remove para un elemento intermedio
+		assertEquals(7, listaOrdenadaAcotada.remove(2));
+		assertEquals(4, listaOrdenadaAcotada.get(0));
+		assertEquals(6, listaOrdenadaAcotada.get(1));
+		assertEquals(9, listaOrdenadaAcotada.get(2));
+		
+		//Vuelvo a añadir elementos para tener la lista [4, 6, 7, 9]
 		listaOrdenadaAcotada.add(7);
 		
-		assertTrue(listaOrdenadaAcotada.remove(3).equals(9));
-		assertTrue(listaOrdenadaAcotada.get(0).equals(4));
-		assertTrue(listaOrdenadaAcotada.get(1).equals(6));
-		assertTrue(listaOrdenadaAcotada.get(2).equals(7));
-		listaOrdenadaAcotada.add(9);
+		//Compruebo que funciona el remove para el ultimo elemento
+		assertEquals(9, listaOrdenadaAcotada.remove(3));
+		assertEquals(4, listaOrdenadaAcotada.get(0));
+		assertEquals(6, listaOrdenadaAcotada.get(1));
+		assertEquals(7, listaOrdenadaAcotada.get(2));
+		
+		
+		//Casos no validos
+		assertThrows(IndexOutOfBoundsException.class, () -> {
+			listaOrdenadaAcotada.remove(4);
+		});
+		
+		assertThrows(IndexOutOfBoundsException.class, () -> {
+			listaOrdenadaAcotada.remove(-5);
+		});
+		
+		assertThrows(IndexOutOfBoundsException.class, () -> {
+			listaOrdenadaAcotada.remove(10);
+		});
+		
+		//Vacio lista
+		listaOrdenadaAcotada.clear();
+		
+		assertThrows(IndexOutOfBoundsException.class, () -> {
+			listaOrdenadaAcotada.remove(0);
+		});
 	}
 
-	*/
+	
 	@Test
 	public void testSize() {
 		//Variable para comprobar el tamanho de la lista
@@ -222,26 +246,31 @@ class ListaOrdenadaAcotadaTest {
 		assertEquals(10, tamanho);
 	}
 	
-	//METODO CLEAR FUNCIONA MAL
-	/*
+	
 	@Test
 	public void testClear() {
 		//Casos validos
 		
 		//Con una lista vacia
 		listaOrdenadaAcotada.clear();
-		assertEquals(null, listaOrdenadaAcotada.get(0));
+		//Compruebo que la lista esta vacia entonces al hacer get(0) lanza excepcion
+		assertThrows(IndexOutOfBoundsException.class, () -> {
+			listaOrdenadaAcotada.get(0);
+		});
 		
 		//Con una lista con elementos
 		//Anhado elementos
 		listaOrdenadaAcotada.add(1);
 		listaOrdenadaAcotada.add(1);
 		//Compruebo que se han anhadido correctamente
-		assertNotNull(listaOrdenadaAcotada.get(0));
+		assertEquals(1, listaOrdenadaAcotada.get(0));
 		//Vacio y compruebo que se ha vaciado
 		listaOrdenadaAcotada.clear();
-		assertEquals(null, listaOrdenadaAcotada.get(0));
+		//Compruebo que la lista esta vacia entonces al hacer get(0) lanza excepcion
+		assertThrows(IndexOutOfBoundsException.class, () -> {
+			listaOrdenadaAcotada.get(0);
+		});
 		
 	}
-	*/
+	
 }
