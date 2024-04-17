@@ -1,4 +1,4 @@
-package es.unican.is2.business;
+package es.unican.is2.GUI;
 import es.unican.is2.domain.*;
 import es.unican.is2.exceptions.*;
 import java.util.Collections;
