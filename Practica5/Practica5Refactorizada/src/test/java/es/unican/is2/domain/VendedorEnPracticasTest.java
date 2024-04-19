@@ -10,11 +10,11 @@ import org.junit.jupiter.api.Test;
 
 public class VendedorEnPracticasTest {
 	
-	private static vendedorEnPracticas sut;
+	private static VendedorEnPracticas sut;
 
 	@BeforeEach
 	public void setUp(){
-		sut = new vendedorEnPracticas("Ana", "1", "11111111A");
+		sut = new VendedorEnPracticas("Ana", "1", "11111111A");
 	}
 	
 	@Test
@@ -23,7 +23,7 @@ public class VendedorEnPracticasTest {
 		assertEquals(sut.getNombre(), "Ana");
 		assertEquals(sut.getDni(), "11111111A");
 		assertEquals(0.0, sut.getTotalVentas());
-		assertEquals(0.0, sut.getC());
+		assertEquals(0.0, sut.getComision());
 	}
 	
 	@Test
@@ -40,34 +40,34 @@ public class VendedorEnPracticasTest {
 	
 	@Test
 	public void testSetC() {
-		sut.setC(100);
-		assertTrue(sut.getC()==100.0);
+		sut.setComision(100);
+		assertTrue(sut.getComision()==100.0);
 		
-		sut.setC(230);
-		assertTrue(sut.getC()==230.0);
+		sut.setComision(230);
+		assertTrue(sut.getComision()==230.0);
 		
-		sut.setC(0);
-		assertTrue(sut.getC()==0.0);
+		sut.setComision(0);
+		assertTrue(sut.getComision()==0.0);
 	}
 
 	@Test
 	public void testAnhadeVenta() {
-		sut.anhade(200);
+		sut.anhadeVenta(200);
 		assertTrue(sut.getTotalVentas() == 200.0);
 		
-		sut.anhade(300);
+		sut.anhadeVenta(300);
 		assertTrue(sut.getTotalVentas() == 500.0);	
 		
-		sut.anhade(0);
+		sut.anhadeVenta(0);
 		assertTrue(sut.getTotalVentas() == 500.0);
 		
 	}
 	
 	@Test
 	public void testEquals() {
-		vendedorEnPracticas igual = new vendedorEnPracticas("Ana", "1", "11111111A");
-		vendedorEnPracticas distintoId = new vendedorEnPracticas("Ana", "2", "11111111A");
-		vendedorEnPracticas distintoNombre = new vendedorEnPracticas("Pepe", "1", "222222222A");
+		VendedorEnPracticas igual = new VendedorEnPracticas("Ana", "1", "11111111A");
+		VendedorEnPracticas distintoId = new VendedorEnPracticas("Ana", "2", "11111111A");
+		VendedorEnPracticas distintoNombre = new VendedorEnPracticas("Pepe", "1", "222222222A");
 		
 		assertTrue(sut.equals(igual));
 		assertFalse(sut.equals(distintoId));

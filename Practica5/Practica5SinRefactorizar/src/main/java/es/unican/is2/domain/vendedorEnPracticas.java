@@ -11,7 +11,8 @@ public class vendedorEnPracticas extends Vendedor {
 	 */
 	public vendedorEnPracticas(String nombre, String id, String dni) {               //WMC +1   
 		super(nombre, id);
-		this.dni= dni;
+		this.dni = dni;
+		
 	}
 	
 	public String getDni() {               //WMC +1   

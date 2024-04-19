@@ -63,52 +63,43 @@ public class GestionComisiones {
 				break;
 
 			case VENDEDOR_DEL_MES:                                       
-				try {
-					vendedores = tienda.vendedores();
-					resultado = new LinkedList<Vendedor>();
-					double maxVentas = 0.0;
-					for (Vendedor v : vendedores) {                       
-						if (v.getTotalVentas() > maxVentas) {              
-							maxVentas = v.getTotalVentas();
-							resultado.clear();
-							resultado.add(v);
-						} else if (v.getTotalVentas() == maxVentas) {      
-							resultado.add(v);
-						}
+				vendedores = tienda.getVendedores();
+				resultado = new LinkedList<Vendedor>();
+				double maxVentas = 0.0;
+				for (Vendedor v : vendedores) {                       
+					if (v.getTotalVentas() > maxVentas) {              
+						maxVentas = v.getTotalVentas();
+						resultado.clear();
+						resultado.add(v);
+					} else if (v.getTotalVentas() == maxVentas) {      
+						resultado.add(v);
 					}
-
-					msj = "";
-					for (Vendedor vn : resultado) {                        
-						msj += vn.getNombre() + "\n";
-					}
-					mensaje("VENDEDORES DEL MES", msj);
-
-				} catch (DataAccessException e) {                         
-					mensaje("ERROR", "No se pudo acceder a los datos");
 				}
+
+				msj = "";
+				for (Vendedor vn : resultado) {                        
+					msj += vn.getNombre() + "\n";
+				}
+				mensaje("VENDEDORES DEL MES", msj);
 				break;
 
 			case VENDEDORES:                                               
-				try {
-					vendedores = tienda.vendedores();
-					System.out.println(vendedores.size());
-					Collections.sort(vendedores, new Comparator<Vendedor>() {
-						public int compare(Vendedor o1, Vendedor o2) {               
-							if (o1.getTotalVentas() > o2.getTotalVentas())        
-								return -1;
-							else if (o1.getTotalVentas() < o2.getTotalVentas())      
-								return 1;
-							return 0;
-						}
-					});
-					msj = "";
-					for (Vendedor vn : vendedores) {                               
-						msj += vn.getNombre() + " (" + vn.getId()+ ") "+vn.getTotalVentas() + "\n";
+				vendedores = tienda.getVendedores();
+				System.out.println(vendedores.size());
+				Collections.sort(vendedores, new Comparator<Vendedor>() {
+					public int compare(Vendedor o1, Vendedor o2) {               
+						if (o1.getTotalVentas() > o2.getTotalVentas())        
+							return -1;
+						else if (o1.getTotalVentas() < o2.getTotalVentas())      
+							return 1;
+						return 0;
 					}
-					mensaje("VENDEDORES", msj);
-				} catch (DataAccessException e) {                             
-					mensaje("ERROR", "No se pudo acceder a los datos");
+				});
+				msj = "";
+				for (Vendedor vn : vendedores) {                               
+					msj += vn.getNombre() + " (" + vn.getId()+ ") "+vn.getTotalVentas() + "\n";
 				}
+				mensaje("VENDEDORES", msj);
 				break;
 			}
 		}
