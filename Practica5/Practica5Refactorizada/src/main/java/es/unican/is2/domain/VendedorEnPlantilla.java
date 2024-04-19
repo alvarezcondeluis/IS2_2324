@@ -1,3 +1,5 @@
+package es.unican.is2.domain;
+
 public class VendedorEnPlantilla extends Vendedor {
 	
 	private TipoVendedor tipo;
@@ -9,25 +11,25 @@ public class VendedorEnPlantilla extends Vendedor {
 	 * @param dni
 	 * @param tipo
 	 */
-	public VendedorEnPlantilla(String nombre, String id, String dni, TipoVendedor tipo) {
+	public VendedorEnPlantilla(String nombre, String id, String dni, TipoVendedor tipo) {    
 		super(nombre, id);
 		this.tipo = tipo;
 		this.dni=dni;
 	}
 	
-	public TipoVendedor tipo() {
+	public TipoVendedor tipo() {              
 		return tipo;
 	}
 	
-	public String dni() {
+	public String dni() {                      
 		return dni;
 	}
 	
 	@Override
-	public boolean equals(Object obj) {
-		if (!(obj instanceof VendedorEnPlantilla)) 
+	public boolean equals(Object obj) {                     
+		if (!(obj instanceof VendedorEnPlantilla))               
 			return false;
 		VendedorEnPlantilla v = (VendedorEnPlantilla) obj;
-		return (v.getId().equals(getId()) && v.dni().equals(dni()));
+		return (v.getId().equals(getId()) && v.dni().equals(dni()));      
 	}
 }

@@ -1,3 +1,5 @@
+package es.unican.is2.domain;
+
 /**
  * Vendedor de la tienda. 
  * Por cada vendedor se almacenan sus datos personales 
@@ -10,7 +12,7 @@ public abstract class Vendedor {
 	private double c;
 	private double totalVentas;
 	
-	public Vendedor(String nombre, String id) {
+	public Vendedor(String nombre, String id) {       
 		this.nombre = nombre;
 		this.id = id;
 	}
@@ -19,7 +21,7 @@ public abstract class Vendedor {
 	 * Retorna el nombre del vendedor
 	 * @return nombre
 	 */
-	public String getNombre() {
+	public String getNombre() {                   
 		return nombre;
 	}
 	
@@ -27,7 +29,7 @@ public abstract class Vendedor {
 	 * Retorna el id del vendedor
 	 * @return id
 	 */
-	public String getId() {
+	public String getId() {                       
 		return id;
 	}
 	
@@ -35,7 +37,7 @@ public abstract class Vendedor {
 	 * Retorna la comision mensual acumulada
 	 * @return Comision total acumulada
 	 */
-	public double getC() {
+	public double getC() {                            
 		return c;
 	}
 	
@@ -43,7 +45,7 @@ public abstract class Vendedor {
 	 * Asigna valor a la comision mensual acumulada
 	 * @param value comision a asignar
 	 */
-	public void setC(double value) {
+	public void setC(double value) {                         
 		this.c = value;
 	}
 	
@@ -51,7 +53,7 @@ public abstract class Vendedor {
 	 * Retorna el importe total mensual de ventas
 	 * @return importe total de ventas acumuladas
 	 */
-	public double getTotalVentas( ) {
+	public double getTotalVentas( ) {                    
 		return totalVentas;
 	}
 	
@@ -59,7 +61,7 @@ public abstract class Vendedor {
 	 * Asigna valor al total de ventas mensual
 	 * @param value total de ventas a asignar
 	 */
-	public void setTotalVentas(double value) {
+	public void setTotalVentas(double value) {                 
 		totalVentas = value;
 	}
 	
@@ -67,7 +69,7 @@ public abstract class Vendedor {
 	 * Anhade una nueva venta al vendedor
 	 * @param importe de la venta
 	 */
-	public void anhade(double importe)  {
+	public void anhade(double importe)  {                       
 		totalVentas += importe;
 	}
 }
