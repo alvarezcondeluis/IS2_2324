@@ -22,13 +22,6 @@ public class GestionComisiones {
 		// opciones del menu
 		final int NUEVA_VENTA = 0, VENDEDOR_DEL_MES = 1, VENDEDORES = 2;
 
-		// variables auxiliares
-		String dni;
-		Lectura lect;
-
-		List<Vendedor> vendedores;
-		List<Vendedor> resultado;
-		String msj;
 
 		// crea la tienda
 		Tienda tienda = new Tienda("C:\\temp\\datosTienda.txt");
@@ -47,61 +40,90 @@ public class GestionComisiones {
 			// realiza las acciones dependiendo de la opcion elegida
 			switch (opcion) {                                                    
 			case NUEVA_VENTA:                                      
-				lect = new Lectura("Datos Venta");
-				lect.creaEntrada("ID Vendedor", "");
-				lect.creaEntrada("Importe", "");
-				lect.esperaYCierra();
-				dni = lect.leeString("ID Vendedor");
-				double importe = lect.leeDouble("Importe");
-				try {
-					if (!tienda.anhadeVenta(dni, importe)) {             
-						mensaje("ERROR", "El vendedor no existe");
-					}
-				} catch (DataAccessException e) {                     
-					mensaje("ERROR", "No se pudo guardar el cambio");
-				}
+				accionNuevaVenta(tienda);
 				break;
 
 			case VENDEDOR_DEL_MES:                                       
-				vendedores = tienda.getVendedores();
-				resultado = new LinkedList<Vendedor>();
-				double maxVentas = 0.0;
-				for (Vendedor v : vendedores) {                       
-					if (v.getTotalVentas() > maxVentas) {              
-						maxVentas = v.getTotalVentas();
-						resultado.clear();
-						resultado.add(v);
-					} else if (v.getTotalVentas() == maxVentas) {      
-						resultado.add(v);
-					}
-				}
-
-				msj = "";
-				for (Vendedor vn : resultado) {                        
-					msj += vn.getNombre() + "\n";
-				}
-				mensaje("VENDEDORES DEL MES", msj);
+				accionVendedorDelMes(tienda);
 				break;
 
 			case VENDEDORES:                                               
-				vendedores = tienda.getVendedores();
-				System.out.println(vendedores.size());
-				Collections.sort(vendedores, new Comparator<Vendedor>() {
-					public int compare(Vendedor o1, Vendedor o2) {               
-						if (o1.getTotalVentas() > o2.getTotalVentas())        
-							return -1;
-						else if (o1.getTotalVentas() < o2.getTotalVentas())      
-							return 1;
-						return 0;
-					}
-				});
-				msj = "";
-				for (Vendedor vn : vendedores) {                               
-					msj += vn.getNombre() + " (" + vn.getId()+ ") "+vn.getTotalVentas() + "\n";
-				}
-				mensaje("VENDEDORES", msj);
+				accionVendedores(tienda);
 				break;
 			}
+		}
+	}
+
+	/**
+	 * Acciones que se realizan al pulsar boton Vendedores
+	 */
+	private static void accionVendedores(Tienda tienda) {
+		List<Vendedor> vendedores;
+		String msj;
+		vendedores = tienda.getVendedores();
+		System.out.println(vendedores.size());
+		Collections.sort(vendedores, new Comparator<Vendedor>() {
+			public int compare(Vendedor o1, Vendedor o2) {               
+				if (o1.getTotalVentas() > o2.getTotalVentas())        
+					return -1;
+				else if (o1.getTotalVentas() < o2.getTotalVentas())      
+					return 1;
+				return 0;
+			}
+		});
+		msj = "";
+		for (Vendedor vn : vendedores) {                               
+			msj += vn.getNombre() + " (" + vn.getId()+ ") "+vn.getTotalVentas() + "\n";
+		}
+		mensaje("VENDEDORES", msj);
+	}
+
+	/**
+	 * Acciones que se realizan al pulsar boton Vendedor Del Mes
+	 */
+	private static void accionVendedorDelMes(Tienda tienda) {
+		List<Vendedor> vendedores;
+		List<Vendedor> resultado;
+		String msj;
+		vendedores = tienda.getVendedores();
+		resultado = new LinkedList<Vendedor>();
+		double maxVentas = 0.0;
+		for (Vendedor v : vendedores) {                       
+			if (v.getTotalVentas() > maxVentas) {              
+				maxVentas = v.getTotalVentas();
+				resultado.clear();
+				resultado.add(v);
+			} else if (v.getTotalVentas() == maxVentas) {      
+				resultado.add(v);
+			}
+		}
+
+		msj = "";
+		for (Vendedor vn : resultado) {                        
+			msj += vn.getNombre() + "\n";
+		}
+		mensaje("VENDEDORES DEL MES", msj);
+	}
+
+	
+	/**
+	 * Acciones que se realizan al pulsar boton NuevaVenta
+	 */
+	private static void accionNuevaVenta(Tienda tienda) {
+		String dni;
+		Lectura lect;
+		lect = new Lectura("Datos Venta");
+		lect.creaEntrada("ID Vendedor", "");
+		lect.creaEntrada("Importe", "");
+		lect.esperaYCierra();
+		dni = lect.leeString("ID Vendedor");
+		double importe = lect.leeDouble("Importe");
+		try {
+			if (!tienda.anhadeVenta(dni, importe)) {             
+				mensaje("ERROR", "El vendedor no existe");
+			}
+		} catch (DataAccessException e) {                     
+			mensaje("ERROR", "No se pudo guardar el cambio");
 		}
 	}
 

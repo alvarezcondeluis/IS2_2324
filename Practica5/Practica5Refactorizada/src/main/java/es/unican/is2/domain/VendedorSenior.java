@@ -17,7 +17,6 @@ public class VendedorSenior extends Vendedor {
 	
 	@Override
 	public void anhadeVenta(double importe)  {  
-		
 		setComision(getComision()+ importe * PORCENTAJE_COMISION);
 		totalVentas += importe;
 	}	
