@@ -23,9 +23,9 @@ public class VendedorSenior extends Vendedor {
 	
 	@Override
 	public boolean equals(Object obj) {                                                  //WMC +1 
-		if (!(obj instanceof VendedorSenior))                                            //WMC +1 
+		if (!(obj instanceof VendedorSenior))                                            //WMC +1 //CCOG +1
 			return false;
 		VendedorSenior v = (VendedorSenior) obj;
-		return (v.getId().equals(getId()) && v.getDni().equals(getDni()));      
+		return (v.getId().equals(getId()) && v.getDni().equals(getDni()));       //CCOG +1
 	}
 }
