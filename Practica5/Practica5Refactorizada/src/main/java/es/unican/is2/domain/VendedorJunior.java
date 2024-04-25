@@ -10,20 +10,20 @@ public class VendedorJunior extends Vendedor {
 	 * @param dni
 	 * @param tipo
 	 */
-	public VendedorJunior(String nombre, String id, String dni) {    
+	public VendedorJunior(String nombre, String id, String dni) {                  //WMC +1 
 		super(nombre, id,dni);
 		
 	}
 	
 	@Override
-	public void anhadeVenta(double importe)  {                       
+	public void anhadeVenta(double importe)  {                                    //WMC +1 
 		setComision(getComision()+ importe * PORCENTAJE_COMISION);
 		totalVentas += importe;
 	}	
 	
 	@Override
-	public boolean equals(Object obj) {                     
-		if (!(obj instanceof VendedorJunior))               
+	public boolean equals(Object obj) {                                         //WMC +1     
+		if (!(obj instanceof VendedorJunior))                                   //WMC +1    
 			return false;
 		VendedorJunior v = (VendedorJunior) obj;
 		return (v.getId().equals(getId()) && v.getDni().equals(getDni()));      
