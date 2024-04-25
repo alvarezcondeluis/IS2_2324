@@ -103,6 +103,8 @@ public class VendedorEnPlantillaTest {
 		assertFalse(sutJunior.equals(distintoIdJunior));
 		assertFalse(sutJunior.equals(distintoDNIJunior));
 		
+		assertFalse(sutJunior.equals(new Object()));
+		
 		
 		VendedorSenior igualSenior = new VendedorSenior("Pepe", "2", "222222222A");
 		VendedorSenior distintoIdSenior = new VendedorSenior("Pepe", "3", "222222222A");
