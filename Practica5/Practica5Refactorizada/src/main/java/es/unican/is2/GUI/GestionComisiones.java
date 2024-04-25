@@ -38,16 +38,16 @@ public class GestionComisiones {
 			opcion = menu.leeOpcion();
 
 			// realiza las acciones dependiendo de la opcion elegida
-			switch (opcion) {                                                    //CCOG +1
-			case NUEVA_VENTA:                                             //WMC +1     //CCOG +1                        
+			switch (opcion) {                                                    //CCOG +2
+			case NUEVA_VENTA:                                             //WMC +1                           
 				accionNuevaVenta(tienda);
 				break;
 
-			case VENDEDOR_DEL_MES:                                       //WMC +1 //CCOG +1
+			case VENDEDOR_DEL_MES:                                       //WMC +1 
 				accionVendedorDelMes(tienda);
 				break;
 
-			case VENDEDORES:                                               //WMC +1 //CCOG +1
+			case VENDEDORES:                                               //WMC +1 
 				accionVendedores(tienda);
 				break;
 			}
