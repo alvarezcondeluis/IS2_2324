@@ -32,29 +32,25 @@ public class GestionComisiones {
 		menu.insertaOpcion("Vendedor del mes", VENDEDOR_DEL_MES);
 		menu.insertaOpcion("Vendedores por ventas", VENDEDORES);
 		int opcion;
-
+		boolean salir = false;
 		// lazo de espera de comandos del usuario
-		while (true) {                                                      //WMC +1     //CCOG +1         
-			opcion = menu.leeOpcion();
-
-			// realiza las acciones dependiendo de la opcion elegida
-			switch (opcion) {                                                    //CCOG +2
-			case NUEVA_VENTA:                                             //WMC +1                           
-				accionNuevaVenta(tienda);
-				break;
-
-			case VENDEDOR_DEL_MES:                                       //WMC +1 
-				accionVendedorDelMes(tienda);
-				break;
-
-			case VENDEDORES:                                               //WMC +1 
-				accionVendedores(tienda);
-				break;
-			
-			
-			default:
-				break;
-		}
+		while (!salir) {  // Cambia la condición del bucle para que dependa de la variable de control
+		    opcion = menu.leeOpcion();
+		    
+		    switch (opcion) {
+		        case NUEVA_VENTA:
+		            accionNuevaVenta(tienda);
+		            break;
+		        case VENDEDOR_DEL_MES:
+		            accionVendedorDelMes(tienda);
+		            break;
+		        case VENDEDORES:
+		            accionVendedores(tienda);
+		            break;
+		        default:
+		            salir = true;  // Establece la variable de control en true para salir del bucle
+		            break;
+		    }
 		}
 	}
 
