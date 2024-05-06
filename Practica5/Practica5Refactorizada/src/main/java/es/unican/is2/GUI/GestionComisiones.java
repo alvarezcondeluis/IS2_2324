@@ -2,7 +2,7 @@ package es.unican.is2.GUI;
 import es.unican.is2.domain.*;
 import es.unican.is2.exceptions.*;
 import java.util.Collections;
-import java.util.Comparator;
+
 import java.util.LinkedList;
 import java.util.List;
 
