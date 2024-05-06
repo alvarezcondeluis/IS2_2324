@@ -46,24 +46,17 @@ public class Tienda {
 	 */
 	private void inicializaDatos () throws DataAccessException {           //WMC +1 
 		vendedores = new LinkedList<Vendedor>();
-		Scanner in = null; 
-		try {
-			
-			// abre el fichero
-			in = new Scanner(new FileReader(datos));
-			
-			// lee los vendedores 
-			leerVendedoresPorTipo(in);
-		} catch (FileNotFoundException e) {                           //WMC +1 //CCoG +1
-			throw new DataAccessException();
-		} finally {
-			if (in != null) {                                      //WMC +1     //CCoG +1
-				in.close();
-			}
-		} // try
+		 
+		
+		try (Scanner in = new Scanner(new FileReader(datos))) {
+		    // lee los vendedores 
+		    leerVendedoresPorTipo(in);
+		} catch (FileNotFoundException e) {
+		    throw new DataAccessException();
+		} 
 	}
 	
-	private Scanner leerVendedoresPorTipo(Scanner in) throws FileNotFoundException {          //WMC +1 
+	private Scanner leerVendedoresPorTipo(Scanner in) {          //WMC +1 
 		
 		
 		// configura el formato de numeros
