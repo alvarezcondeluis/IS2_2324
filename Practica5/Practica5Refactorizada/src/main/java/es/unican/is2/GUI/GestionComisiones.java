@@ -50,7 +50,11 @@ public class GestionComisiones {
 			case VENDEDORES:                                               //WMC +1 
 				accionVendedores(tienda);
 				break;
-			}
+			
+			
+			default:
+				break;
+		}
 		}
 	}
 
@@ -61,15 +65,13 @@ public class GestionComisiones {
 		List<Vendedor> vendedores;
 		String msj;
 		vendedores = tienda.getVendedores();
-		System.out.println(vendedores.size());
-		Collections.sort(vendedores, new Comparator<Vendedor>() {
-			public int compare(Vendedor o1, Vendedor o2) {                     //WMC +1      
-				if (o1.getTotalVentas() > o2.getTotalVentas())                  //WMC +1 //CCOG +1
-					return -1;
-				else if (o1.getTotalVentas() < o2.getTotalVentas())              //WMC +1  //CCOG +1
-					return 1;
-				return 0;
-			}
+		
+		Collections.sort(vendedores, (o1, o2) -> {
+		    if (o1.getTotalVentas() > o2.getTotalVentas())
+		        return -1;
+		    else if (o1.getTotalVentas() < o2.getTotalVentas())
+		        return 1;
+		    return 0;
 		});
 		msj = "";
 		for (Vendedor vn : vendedores) {                                        //WMC +1  //CCOG +1                       

@@ -21,7 +21,7 @@ public class Tienda {
 
 	private List<Vendedor> vendedores = new LinkedList<Vendedor>();
 	private String direccion;
-	private String nombre;
+	private String nombreTienda;
 
 	private String datos;
 
@@ -46,8 +46,12 @@ public class Tienda {
 	 */
 	private void inicializaDatos () throws DataAccessException {           //WMC +1 
 		vendedores = new LinkedList<Vendedor>();
-		Scanner in = null;
+		Scanner in = null; 
 		try {
+			
+			// abre el fichero
+			in = new Scanner(new FileReader(datos));
+			
 			// lee los vendedores 
 			leerVendedoresPorTipo(in);
 		} catch (FileNotFoundException e) {                           //WMC +1 //CCoG +1
@@ -59,12 +63,12 @@ public class Tienda {
 		} // try
 	}
 	
-	private void leerVendedoresPorTipo(Scanner in) throws FileNotFoundException {          //WMC +1 
-		// abre el fichero
-		in = new Scanner(new FileReader(datos));
+	private Scanner leerVendedoresPorTipo(Scanner in) throws FileNotFoundException {          //WMC +1 
+		
+		
 		// configura el formato de numeros
 		in.useLocale(Locale.ENGLISH);
-		nombre = in.nextLine();
+		nombreTienda = in.nextLine();
 		direccion = in.nextLine();
 		in.next();
 		Vendedor ven = null;
@@ -114,6 +118,8 @@ public class Tienda {
 			ven.setTotalVentas(totalVentas);
 			vendedores.add(ven);
 		}
+		
+		return in;
 	}
 
 	/**
@@ -128,8 +134,8 @@ public class Tienda {
 	 * Retorna el nombre de la tienda
 	 * @return Nombre de la tienda
 	 */
-	public String nombre() {                                               //WMC +1 
-		return nombre;
+	public String nombreTienda() {                                               //WMC +1 
+		return nombreTienda;
 	}
 
 	
@@ -250,7 +256,7 @@ public class Tienda {
 			throws IOException {                                              //WMC +1 
 		PrintWriter out;
 		out = new PrintWriter(new FileWriter(datos));
-		out.println(nombre);
+		out.println(nombreTienda);
 		out.println(direccion);
 		out.println();
 		out.println("Senior");
